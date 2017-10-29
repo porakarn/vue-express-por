@@ -15,6 +15,7 @@
         <tr v-for="course in courses" :key="course._id">
           <td class="text-left"> {{ course.name}}</td>
           <td class="text-left"> {{ course.price}}</td>
+            <td class="text-left"> {{ course.user}}</td>
            <!-- <router-link :to="{name: 'Course', params: {
              courseId: course.id
            }

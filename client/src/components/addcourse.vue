@@ -15,6 +15,9 @@
       </template>
     </at-input><br>
 
+
+  
+
 <at-button type="primary" @click="addToAPI">Submit</at-button>
 
 
@@ -37,7 +40,8 @@ export default {
     addToAPI(){
       let newCourse = {
           name: this.Course.name,
-          price: this.Course.price
+          price: this.Course.price,
+          user: this.Course.user.email
       }
       console.log(newCourse);
       axios.post('http://localhost:8000/courses', newCourse)
