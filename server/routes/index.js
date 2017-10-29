@@ -18,6 +18,7 @@ const AuthPolicy = require('../app/Policies/AuthPolicy');
 /**
  * Routes
 
+ 
  */
  router.route('/courses')
  .get(CourseController.list_all_courses)
