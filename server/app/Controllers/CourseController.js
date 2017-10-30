@@ -30,7 +30,7 @@ create_course (req,res){
 
 async show (req, res) {
     try {
-      const course = await Course.findById(req.params._id)
+      const course = await Course.findById(req.params.id)
       res.send(course)
     } catch (err) {
       res.status(500).send({
@@ -39,19 +39,43 @@ async show (req, res) {
     }
   },
 
+  // async put (req, res) {
+  //   try {
+  //     await Course.update(req.body, {
+  //       where: {
+  //         id: req.params.id
+  //       }
+  //     })
+  //     res.send(req.body)
+  //   } catch (err) {
+  //     res.status(500).send({
+  //       error: 'an error has occured trying to update the course'
+  //     })
+  //   }
+  // }
+
+
+
   put (req, res) {
-    try {
-     Course.update(req.body, {
-        where: {
-          id: req.params.courseId
-        }
+
+    // use our bear model to find the bear we want
+    Course.findById(req.params.id, function (err, course) {
+
+      if (err)
+        res.send(err)
+
+      course.name = req.body.name  // update the bears info
+      course.price = req.body.price // update the bears info
+
+      // save the bear
+      course.save(function (err) {
+        if (err)
+          res.send(err)
+
+        res.json({ message: 'Bear updated!' })
       })
-      res.send(req.body)
-    } catch (err) {
-      res.status(500).send({
-        error: 'an error has occured trying to update the course'
-      })
-    }
+
+    })
   }
 
 }

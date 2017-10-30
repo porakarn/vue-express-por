@@ -11,6 +11,7 @@ import Register from '@/components/auth/register.vue'
 import Courses from '@/components/courses.vue'
 import Addcourse from '@/components/addcourse.vue'
 import Course from '@/components/course.vue'
+import Editcourse from '@/components/Editcourse.vue'
 
 Vue.use(Router)
 
@@ -45,6 +46,11 @@ export default new Router({
       path: '/courses/:id',
       name: 'Course',
       component: Course
+    },
+    {
+      path: '/courses/edit/:id',
+      name: 'Editcourse',
+      component: Editcourse
     }
 
   ]

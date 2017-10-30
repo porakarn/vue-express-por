@@ -41,7 +41,7 @@ export default {
       let newCourse = {
           name: this.Course.name,
           price: this.Course.price,
-          user: this.Course.user.email
+       
       }
       console.log(newCourse);
       axios.post('http://localhost:8000/courses', newCourse)

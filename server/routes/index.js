@@ -18,14 +18,17 @@ const AuthPolicy = require('../app/Policies/AuthPolicy');
 /**
  * Routes
 
- 
+
  */
  router.route('/courses')
  .get(CourseController.list_all_courses)
  .post(CourseController.create_course)
 
-//  router.get('/courses/:_id',
-//    CourseController.show)
+ router.get('/courses/:id',
+   CourseController.show)
+
+router.put('/courses/update/:id',
+  CourseController.put)
 
 
 // router.get('/courses/:id', function (req, res) {
@@ -37,16 +40,15 @@ const AuthPolicy = require('../app/Policies/AuthPolicy');
 //     res.json(course);
 //   });
 // });
+///////////////////////////////////////////
+// router.route('/courses/:id').get(function (req, res) {
+//   var id = req.params.id;
+//   Course.findById(id, function (err, course) {
+//     res.json(course);
+//   });
+// });
 
-router.route('/courses/:id').get(function (req, res) {
-  var id = req.params.id;
-  Course.findById(id, function (err, course) {
-    res.json(course);
-  });
-});
-
- router.put('/courses/:courseId',
-   CourseController.put)
+ 
 
 
 router.post('/register', AuthPolicy.register, AuthController.register);
@@ -56,23 +58,23 @@ router.post('/login', AuthController.login);
 
 
 //  Defined update route
-router.route('/courses/update/:id').post(function (req, res) {
-  Course.findById(req.params.id, function (err, course) {
-    if (!course)
-      return next(new Error('Could not load Document'));
-    else {
-      course.name = req.body.name;
-      course.price = req.body.price;
+// router.route('/courses/update/:id').post(function (req, res) {
+//   Course.findById(req.params.id, function (err, course) {
+//     if (!course)
+//       return next(new Error('Could not load Document'));
+//     else {
+//       course.name = req.body.name;
+//       course.price = req.body.price;
 
-      course.save().then(course => {
-        res.json('Update complete');
-      })
-        .catch(err => {
-          res.status(400).send("unable to update the database");
-        });
-    }
-  });
-});
+//       course.save().then(course => {
+//         res.json('Update complete');
+//       })
+//         .catch(err => {
+//           res.status(400).send("unable to update the database");
+//         });
+//     }
+//   });
+// });
 
 // Defined delete | remove | destroy route
 router.route('/courses/delete/:id').get(function (req, res) {

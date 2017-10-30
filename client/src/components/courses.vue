@@ -24,13 +24,14 @@
            </router-link> -->
 
          <!-- <router-link :to="'/courses/' + course._id">Detail</router-link> -->
-         <router-link :to="{name: 'Course', params: { id: course._id }}" class="btn btn-primary">Edit</router-link>
+         <router-link :to="{name: 'Course', params: { id: course._id }}" class="btn btn-primary">Show</router-link>
 <!-- :to="{'/item/' + item.id}" -->
                      <!-- <at-button type="button " icon="icon-search" :to="{name: 'Viewcourse', params: {
                           courseId: course.id
                         }
                        }"></at-button> -->
-<button class="btn btn-danger" v-on:click="deleteItem(course._id)">Delete</button>
+<button class="btn btn-danger" v-on:click="deleteItem(course.id)">Delete</button>
+<router-link :to="{name: 'Editcourse', params: { id: course._id }}" class="btn btn-primary">Edit</router-link>
        </tr>
       </tbody>
     </table>
@@ -70,12 +71,28 @@ export default {
         logout () {
           this.$store.dispatch('logout')
         },
-         deleteItem(_id)
+         deleteItem(id)
             {
-              let uri = 'http://localhost:8000/courses/delete/'+_id;
-              this.courses.splice(_id, 1);
-              this.axios.get(uri);
+              
+            
+
+const courseId = this.$route.params.id
+         axios.get(`http://localhost:8000/courses/delete/${courseId}`)
+           .then((response) => {
+          
+                this.courses.splice(id, 1);
+              })
+            .catch((error) => {
+                console.log(error);
+            });
+             
             }
+
+//  deleteItem( _id) {
+//       axios.delete('http://localhost:8000/courses/delete/' + _id)
+//         .then(response => this.courses.splice(_id, 1));
+
+
       },
       computed: {
         isLoggedIn () {

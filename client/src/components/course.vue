@@ -32,8 +32,7 @@ mounted(){
 },
 methods:{
     onDelete(){
-      let courseId = this.$route.params.id;
-    axios.delete(`http://localhost:8000/courses/${courseId}`)
+    axios.delete('http://localhost:8000/courses/delete/' + this.$route.params._id)
      
         .then((response) => {
          this.$router.push({
@@ -46,6 +45,9 @@ methods:{
     }
   }
 }
+
+
+
 // onDelete(){
 //     let meetupId = this.state.details.id;
 //     axios.delete(`http://localhost:3000/api/meetups/${meetupId}`)
