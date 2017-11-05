@@ -36,12 +36,14 @@ export default {
   Course: { name: '', price: '' },
     }
   },
+
   methods:{
+
     addToAPI(){
       let newCourse = {
           name: this.Course.name,
-          price: this.Course.price,
-       
+          price: this.Course.price
+         
       }
       console.log(newCourse);
       axios.post('http://localhost:8000/courses', newCourse)

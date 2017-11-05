@@ -7,15 +7,16 @@
       <table class="table table-striped table-borderes">
       <thead>
         <tr>
-          <th class="center">Course Name</th>
+          <th class="center"> Name</th>
           <th class="center">Price</th>
+           <th class="center"> Owner</th>
         </tr>
       </thead>
       <tbody>
         <tr v-for="course in courses" :key="course._id">
           <td class="text-left"> {{ course.name}}</td>
           <td class="text-left"> {{ course.price}}</td>
-            <td class="text-left"> {{ course.user}}</td>
+            <td class="text-left"> {{ course.owner}}</td>
            <!-- <router-link :to="{name: 'Course', params: {
              courseId: course.id
            }

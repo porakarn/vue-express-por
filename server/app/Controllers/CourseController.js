@@ -5,7 +5,7 @@ var Course = mongoose.model('Course');
 module.exports = {
 list_all_courses(req,res){
 
-  Course.find({}, function(err, course){
+  Course.find({ owner: req.owner}).populate('owner').exec(function(err, course){
       if (err) {
         res.send(err);
       } else {
@@ -15,9 +15,30 @@ list_all_courses(req,res){
   });
 
 },
+// let book = new Course(req.body)
+//   book.owner = req.account.data._id
+//   book.date_added = new Date()
+
+// book.save(function (err, book)
+
+
+//  var name = req.body.name;
+//     var price = req.body.price;
+//     var image = req.body.image;
+//     var desc = req.body.description;
+//     var author = {
+//         id: req.user._id,
+//         username: req.user.username
+//     }
+//     var newCampground = {name: name, price: price, image: image, description: desc, author:author}
+//     // Create a new campground and save to DB
+//     Campground.create(newCampground, function(err, newlyCreated){
+
 
 create_course (req,res){
-   var new_course = new Course(req.body);
+  let new_course = new Course(req.body)
+ 
+
    new_course.save(function(err, course){
 
      if (err) {
@@ -27,17 +48,29 @@ create_course (req,res){
      }
    });
 },
-
-async show (req, res) {
-    try {
-      const course = await Course.findById(req.params.id)
-      res.send(course)
-    } catch (err) {
-      res.status(500).send({
-        error: 'an error has occured trying to show the courses'
-      })
+// //ของจริง
+// async show (req, res) {
+//     try {
+//       const course = await Course.findById(req.params.id)
+//       res.send(course)
+//     } catch (err) {
+//       res.status(500).send({
+//         error: 'an error has occured trying to show the courses'
+//       })
+//     }
+//   },
+  
+show (req, res) {
+  Course.findById(req.params.id).populate('owner').exec(function(err, course){
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(course);
     }
-  },
+  })
+
+},
+
 
   // async put (req, res) {
   //   try {

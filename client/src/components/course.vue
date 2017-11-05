@@ -1,8 +1,8 @@
 <template>
   <div>
-    <td class="text-left"> {{ course.name}}</td>
-    <td class="text-left"> {{ course.price}}</td>
-
+    <td class="text-left">name {{ course.name}}</td> 
+    <td class="text-left">price {{ course.price}}</td>
+    <td class="text-left">owner {{ course.owner._id }}</td>
      <button @click="onDelete" class="btn red right">Delete</button>
   </div>
 
