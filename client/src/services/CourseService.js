@@ -8,13 +8,26 @@ export default {
       }
     })
   },
-  show (_id) {
-    return Api().get('courses/:_id')
+  show(courseId) {
+    return Api().get(`courses/${courseId}`, courseId)
   },
-  post (course) {
-    return Api().post('courses', course)
+  post(newCourse) {
+    return Api().post('courses', newCourse)
   },
-  put (course) {
-    return Api().put(`courses/${course.id}`, course)
+  // put(updCustomer, course) {
+  //    return Api().put('courses/update/' + this.$route.params.course., updCustomer, course)
+    // return Api().put(`courses/update/${courseId}`, updCustomer)
+
+
+
+
   }
-}
+
+
+// return Api().put(`songs/${song.id}`, song)
+
+// axios.put(`http://localhost:8000/courses/update/${courseId}`, updCustomer)
+
+// $route.params.id
+
+// this.$http.get('http://localhost:3000/api/product/' + this.$route.params.id).then((response) => {

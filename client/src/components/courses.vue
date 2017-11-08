@@ -47,6 +47,7 @@
 /* eslint-disable */
 
 import axios from 'axios';
+import CourseService from '@/services/CourseService'
 export default {
 
     name:'course',
@@ -56,17 +57,21 @@ export default {
 
         }
     },
+async mounted () {
+    this.courses = (await CourseService.index()).data
 
-        mounted() {
-        axios.get('http://localhost:8000/courses')
-            .then((response) => {
-                console.log(response.data);
-                this.courses = response.data;
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    },
+},
+
+    //     mounted() {
+    //     axios.get('http://localhost:8000/courses')
+    //         .then((response) => {
+    //             console.log(response.data);
+    //             this.courses = response.data;
+    //         })
+    //         .catch((error) => {
+    //             console.log(error);
+    //         });
+    // },
 
       methods: {
         logout () {

@@ -29,77 +29,36 @@
 
 <script>
  import axios from 'axios';
+ import CourseService from '@/services/CourseService'
 export default {
 
   data () {
     return {
-  course: { name: '', price: '' },
+   course: { name: '', price: '' },
+  
+
+
     }
   },
-     created: function(){
-            this.getItem();
-        },
+    
+  async mounted () {
+    try {
+     const courseId = this.$route.params.id
+      this.course = (await CourseService.show(courseId)).data
+    } catch (err) {
+      console.log(err)
+    }
+  },
+ 
+                    
  methods: {
-            getItem()
+ updateItem()
             {
-               const courseId = this.$route.params.id
-         axios.get(`http://localhost:8000/courses/${courseId}`)
-           .then((response) => {
-               console.log(response.data);
-                this.course = response.data;
-              })
-            .catch((error) => {
-                console.log(error);
-            });
-             
-            },
-
-            updateItem()
-            {
-               
-  //  let updCustomer = {
-  //                   name: this.course.name,
-  //                   price: this.course.price,
-             
-                    
-  //               }
-  //                const courseId = this.$route.params.id
-  //               this.axios.put(`http://localhost:8000/courses/update/${courseId}`), updCustomer)
-  //                  .then((response) => {
-  //         console.log(response);
-  //       }).then(() => {
-  //         this.$router.push({
-  //           name: 'Courses'
-  //         })
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-
-//  let updCustomer = {
-//                     name: this.course.name,
-//                     price: this.course.price
-                    
-//                 }
-//                 this.axios.put('http://localhost:8000/courses/update/'+this.$route.params.id, updCustomer)
-                   
-//                       .then((response) => {
-//           console.log(response);
-//         }).then(() => {
-//           this.$router.push({
-//             name: 'Courses'
-//           })
-//         })
-//         .catch((error) => {
-//           console.log(error);
-//         });
-
-//
-let updCustomer = {
+               let updCustomer = {
                     name: this.course.name,
                      price: this.course.price,
-}
- const courseId = this.$route.params.id
+               }
+const courseId = this.$route.params.id
              axios.put(`http://localhost:8000/courses/update/${courseId}`, updCustomer )
      .then((response) => {
           console.log(response);
@@ -113,7 +72,28 @@ let updCustomer = {
         });
 
 
-            //
+
+//       try {
+//         let updCustomer = {
+//                     name: this.course.name,
+//                      price: this.course.price,
+// }
+// //  const courseId = this.$route.params.id
+        
+//         await CourseService.put(updCustomer , this.course )
+//         this.$router.push({
+//           name: 'Courses',
+//           // params: {
+//           //   songId: songId
+//           // }
+//         })
+//       } catch (err) {
+//         console.log(err)
+//       }
+
+
+//////////-.
+            
             }
         }
 

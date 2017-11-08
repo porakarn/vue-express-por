@@ -29,6 +29,7 @@
 
 <script>
  import axios from 'axios';
+ import CourseService from '@/services/CourseService'
 export default {
 
   data () {
@@ -39,27 +40,31 @@ export default {
 
   methods:{
 
-    addToAPI(){
-      let newCourse = {
+   async addToAPI () {
+    
+ let newCourse = {
           name: this.Course.name,
           price: this.Course.price
          
       }
       console.log(newCourse);
-      axios.post('http://localhost:8000/courses', newCourse)
-        .then((response) => {
-          console.log(response);
-        }).then(() => {
-          this.$router.push({
-            name: 'Courses'
-          })
+
+      try {
+        await CourseService.post(newCourse)
+        this.$router.push({
+          name: 'Courses'
         })
-        .catch((error) => {
-          console.log(error);
-        });
+      } catch (err) {
+        console.log(err)
+      }
     }
+
   }
+
 }
+
+
+
 </script>
 
 
